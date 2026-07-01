@@ -588,7 +588,31 @@ document.addEventListener('DOMContentLoaded', () => {
     if (collapseBtn && sidebar) {
         collapseBtn.addEventListener('click', () => {
             sidebar.classList.toggle('collapsed');
-            showToast(sidebar.classList.contains('collapsed') ? 'Menu recolhido' : 'Menu expandido', 'info');
+        });
+    }
+
+    // Mobile Landing Screen Logic
+    const mobileLanding = document.getElementById('mobile-landing-screen');
+    const btnEnterDashboard = document.getElementById('btn-enter-dashboard');
+    
+    // Check if on mobile and not visited yet this session
+    const isMobile = window.innerWidth <= 768;
+    if (isMobile && !sessionStorage.getItem('mobile_visited')) {
+        mobileLanding.classList.add('active');
+    } else {
+        if (mobileLanding) mobileLanding.style.display = 'none';
+    }
+
+    if (btnEnterDashboard && mobileLanding) {
+        btnEnterDashboard.addEventListener('click', () => {
+            mobileLanding.style.opacity = '0';
+            mobileLanding.style.transition = 'opacity 0.4s ease';
+            setTimeout(() => {
+                mobileLanding.classList.remove('active');
+                mobileLanding.style.display = 'none';
+                sessionStorage.setItem('mobile_visited', 'true');
+                showToast('Bem-vindo de volta, Carlos!', 'success');
+            }, 400);
         });
     }
 

@@ -29,7 +29,7 @@
     --danger-bg: rgba(239, 68, 68, 0.15);
     
     /* Layout & Shadow */
-    --sidebar-width: 260px;
+    --sidebar-width: 240px;
     --glass-blur: 16px;
     --card-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -65,6 +65,7 @@ body {
     display: flex;
     overflow-x: hidden;
     transition: var(--transition-smooth);
+    font-size: 14px; /* Reduced base font size */
 }
 
 h1, h2, h3, h4, .brand-text {
@@ -333,8 +334,8 @@ header {
 }
 
 .container {
-    padding: 32px;
-    max-width: 1400px;
+    padding: 20px 24px;
+    max-width: 1200px; /* Reduced max-width for more compact layouts */
     width: 100%;
     margin: 0 auto;
     flex-grow: 1;
@@ -358,13 +359,13 @@ header {
 /* Card Widgets & Grid layouts */
 .metrics-row {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 24px;
-    margin-bottom: 32px;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
 }
 
 .metric-card {
-    padding: 24px;
+    padding: 16px 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -432,8 +433,8 @@ header {
 .dashboard-grid {
     display: grid;
     grid-template-columns: 2fr 1fr;
-    gap: 24px;
-    margin-bottom: 32px;
+    gap: 18px;
+    margin-bottom: 24px;
 }
 
 .panel-title {
@@ -1151,4 +1152,43 @@ header {
     .category-selector {
         grid-template-columns: repeat(2, 1fr);
     }
+}
+
+/* Mobile Landing Screen Overlay */
+#mobile-landing-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #050814;
+    background-image: url('tela-entrada-mobile.png');
+    background-size: cover;
+    background-position: center;
+    z-index: 2000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+#mobile-landing-screen.active {
+    display: flex;
+}
+
+.enter-btn-overlay {
+    position: absolute;
+    bottom: 5.5vh;
+    width: 85%;
+    max-width: 320px;
+    height: 7vh;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    border-radius: 40px;
+    outline: none;
+    transition: background 0.2s ease;
+}
+
+.enter-btn-overlay:active {
+    background: rgba(255, 255, 255, 0.05);
 }
