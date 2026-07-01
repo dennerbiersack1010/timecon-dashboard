@@ -107,8 +107,8 @@ h1, h2, h3, h4, .brand-text {
 /* Sidebar Navigation (Desktop) */
 .sidebar {
     width: var(--sidebar-width);
-    background-color: var(--bg-secondary);
-    border-right: 1px solid var(--border-color);
+    background-color: #ffffff; /* White background to make logo pop */
+    border-right: 1px solid rgba(18, 18, 75, 0.08);
     padding: 24px;
     display: flex;
     flex-direction: column;
@@ -116,6 +116,7 @@ h1, h2, h3, h4, .brand-text {
     height: 100vh;
     z-index: 100;
     transition: var(--transition-smooth);
+    box-shadow: 4px 0 16px rgba(18, 18, 75, 0.02);
 }
 
 .logo-container {
@@ -142,7 +143,7 @@ h1, h2, h3, h4, .brand-text {
     display: flex;
     align-items: center;
     gap: 12px;
-    color: var(--text-secondary);
+    color: #4b526d; /* Darker text for readability on white sidebar */
     text-decoration: none;
     padding: 12px 16px;
     border-radius: 12px;
@@ -158,13 +159,15 @@ h1, h2, h3, h4, .brand-text {
 }
 
 .nav-item.active a, .nav-item a:hover {
-    background: linear-gradient(135deg, rgba(8, 155, 215, 0.15) 0%, rgba(1, 11, 82, 0.2) 100%);
-    color: var(--brand-cyan);
-    border-left: 3px solid var(--brand-cyan);
+    background: rgba(18, 18, 75, 0.05);
+    color: var(--brand-navy);
+    border-left: 3px solid var(--brand-navy);
 }
 
 [data-theme="light"] .nav-item.active a, [data-theme="light"] .nav-item a:hover {
-    background: linear-gradient(135deg, rgba(8, 155, 215, 0.1) 0%, rgba(244, 246, 250, 0.8) 100%);
+    background: rgba(18, 18, 75, 0.04);
+    color: var(--brand-navy);
+    border-left: 3px solid var(--brand-navy);
 }
 
 .sidebar-footer {
@@ -180,10 +183,11 @@ h1, h2, h3, h4, .brand-text {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(18, 18, 75, 0.03);
     padding: 8px 12px;
     border-radius: 12px;
-    border: 1px solid var(--border-color);
+    border: 1px solid rgba(18, 18, 75, 0.08);
+    color: var(--brand-navy);
 }
 
 .theme-toggle-btn, .theme-toggle-btn-mobile {
@@ -391,9 +395,22 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
+    padding: 16px 20px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
     gap: 16px;
     flex-wrap: wrap;
+    transition: var(--transition-smooth);
+}
+
+[data-theme="light"] .quota-item {
+    background: rgba(18, 18, 75, 0.02);
+}
+
+.quota-item:hover {
+    border-color: var(--brand-cyan);
+    background: rgba(8, 155, 215, 0.04);
 }
 
 .quota-main-info {
@@ -965,12 +982,12 @@ header {
     bottom: 0;
     left: 0;
     width: 100%;
-    background-color: var(--bg-secondary);
-    border-top: 1px solid var(--border-color);
+    background-color: #ffffff; /* White background to match sidebar */
+    border-top: 1px solid rgba(18, 18, 75, 0.08);
     z-index: 95;
     padding: 8px 12px;
     justify-content: space-around;
-    box-shadow: 0 -4px 16px rgba(0,0,0,0.2);
+    box-shadow: 0 -4px 16px rgba(18, 18, 75, 0.05);
 }
 
 .mobile-nav-item {
@@ -978,7 +995,7 @@ header {
     flex-direction: column;
     align-items: center;
     gap: 4px;
-    color: var(--text-secondary);
+    color: #4b526d;
     text-decoration: none;
     font-size: 0.75rem;
     font-weight: 500;
@@ -991,7 +1008,7 @@ header {
 }
 
 .mobile-nav-item.active, .mobile-nav-item:hover {
-    color: var(--brand-cyan);
+    color: var(--brand-navy);
 }
 
 /* Responsive Rules */
