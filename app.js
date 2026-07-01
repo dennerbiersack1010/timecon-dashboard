@@ -582,6 +582,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 3500);
     }
 
+    // Sidebar Collapse Logic
+    const sidebar = document.querySelector('.sidebar');
+    const collapseBtn = document.getElementById('sidebar-collapse-btn');
+    if (collapseBtn && sidebar) {
+        collapseBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('collapsed');
+            showToast(sidebar.classList.contains('collapsed') ? 'Menu recolhido' : 'Menu expandido', 'info');
+        });
+    }
+
     // Setup initial simulator values
     updateSimulation();
 });
