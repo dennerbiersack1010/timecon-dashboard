@@ -1154,39 +1154,69 @@ header {
     }
 }
 
-/* Mobile Landing Screen Overlay */
-#mobile-landing-screen {
+/* Unified Welcome Landing Screen Overlay */
+#welcome-landing-screen {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
     background-color: #050814;
-    background-image: url('tela-entrada-mobile.png');
     background-size: cover;
     background-position: center;
     z-index: 2000;
     display: none;
     align-items: center;
     justify-content: center;
+    opacity: 1;
 }
 
-#mobile-landing-screen.active {
+#welcome-landing-screen.active {
     display: flex;
 }
 
-.enter-btn-overlay {
-    position: absolute;
-    bottom: 5.5vh;
-    width: 85%;
-    max-width: 320px;
-    height: 7vh;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    border-radius: 40px;
-    outline: none;
-    transition: background 0.2s ease;
+/* Default Desktop Welcome screen styling */
+@media (min-width: 769px) {
+    #welcome-landing-screen {
+        background-image: url('tela-entrada-desktop.png');
+    }
+    
+    .enter-btn-overlay {
+        position: absolute;
+        bottom: 15.5vh; /* Positioned over the button in the desktop design */
+        left: 7.2vw;
+        width: 300px;
+        height: 68px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        border-radius: 40px;
+        outline: none;
+        transition: background 0.2s ease;
+    }
+}
+
+/* Mobile Welcome screen styling */
+@media (max-width: 768px) {
+    #welcome-landing-screen {
+        background-image: url('tela-entrada-mobile.png');
+    }
+    
+    .enter-btn-overlay {
+        position: absolute;
+        bottom: 5.5vh; /* Positioned over the button in the mobile design */
+        left: 50%;
+        transform: translateX(-50%);
+        width: 85%;
+        max-width: 320px;
+        height: 7vh;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        border-radius: 40px;
+        outline: none;
+        transition: background 0.2s ease;
+    }
 }
 
 .enter-btn-overlay:active {

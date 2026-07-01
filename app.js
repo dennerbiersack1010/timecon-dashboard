@@ -591,27 +591,26 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Mobile Landing Screen Logic
-    const mobileLanding = document.getElementById('mobile-landing-screen');
+    // Welcome Landing Screen Logic (Desktop & Mobile)
+    const welcomeLanding = document.getElementById('welcome-landing-screen');
     const btnEnterDashboard = document.getElementById('btn-enter-dashboard');
     
-    // Check if on mobile and not visited yet this session
-    const isMobile = window.innerWidth <= 768;
-    if (isMobile && !sessionStorage.getItem('mobile_visited')) {
-        mobileLanding.classList.add('active');
+    // Check if welcome screen has already been visited in this session
+    if (!sessionStorage.getItem('welcome_visited')) {
+        if (welcomeLanding) welcomeLanding.classList.add('active');
     } else {
-        if (mobileLanding) mobileLanding.style.display = 'none';
+        if (welcomeLanding) welcomeLanding.style.display = 'none';
     }
 
-    if (btnEnterDashboard && mobileLanding) {
+    if (btnEnterDashboard && welcomeLanding) {
         btnEnterDashboard.addEventListener('click', () => {
-            mobileLanding.style.opacity = '0';
-            mobileLanding.style.transition = 'opacity 0.4s ease';
+            welcomeLanding.style.opacity = '0';
+            welcomeLanding.style.transition = 'opacity 0.4s ease';
             setTimeout(() => {
-                mobileLanding.classList.remove('active');
-                mobileLanding.style.display = 'none';
-                sessionStorage.setItem('mobile_visited', 'true');
-                showToast('Bem-vindo de volta, Carlos!', 'success');
+                welcomeLanding.classList.remove('active');
+                welcomeLanding.style.display = 'none';
+                sessionStorage.setItem('welcome_visited', 'true');
+                showToast('Bem-vindo ao Dashboard Timecon!', 'success');
             }, 400);
         });
     }
