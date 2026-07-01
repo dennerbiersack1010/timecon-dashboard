@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timecon | Soluções Financeiras - Portal do Consorciado</title>
+    <!-- CSS Link -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- FontAwesome for Premium Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Sidebar (Desktop & Tablet) -->
+    <nav class="sidebar">
+        <div class="logo-container">
+            <img src="logo.png" alt="Timecon Logo" class="logo-img">
+        </div>
+        
+        <ul class="nav-links">
+            <!-- Client Views -->
+            <li class="nav-item active client-nav" data-view="dashboard-cliente">
+                <a href="#dashboard-cliente">
+                    <i class="fa-solid fa-chart-pie"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item client-nav" data-view="simulador">
+                <a href="#simulador">
+                    <i class="fa-solid fa-sliders"></i>
+                    <span>Simulador</span>
+                </a>
+            </li>
+            <li class="nav-item client-nav" data-view="lances">
+                <a href="#lances">
+                    <i class="fa-solid fa-gavel"></i>
+                    <span>Ofertar Lance</span>
+                </a>
+            </li>
+            <li class="nav-item client-nav" data-view="financeiro">
+                <a href="#financeiro">
+                    <i class="fa-solid fa-wallet"></i>
+                    <span>Financeiro</span>
+                </a>
+            </li>
+
+            <!-- Admin Views (Hidden by default, shown when Admin is selected) -->
+            <li class="nav-item admin-nav" data-view="dashboard-admin" style="display: none;">
+                <a href="#dashboard-admin">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span>Visão Geral</span>
+                </a>
+            </li>
+            <li class="nav-item admin-nav" data-view="admin-lances" style="display: none;">
+                <a href="#admin-lances">
+                    <i class="fa-solid fa-check-double"></i>
+                    <span>Aprovar Lances</span>
+                </a>
+            </li>
+        </ul>
+
+        <div class="sidebar-footer">
+            <div class="profile-toggle">
+                <span id="user-display-name" style="font-size: 0.85rem; font-weight: 500;">Carlos Silva</span>
+                <button class="theme-toggle-btn" title="Alternar Modo Escuro/Claro">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Navigation (Bottom Bar) -->
+    <nav class="mobile-nav">
+        <!-- Client links -->
+        <a href="#dashboard-cliente" class="mobile-nav-item active client-mobile-nav" data-view="dashboard-cliente">
+            <i class="fa-solid fa-chart-pie"></i>
+            <span>Dashboard</span>
+        </a>
+        <a href="#simulador" class="mobile-nav-item client-mobile-nav" data-view="simulador">
+            <i class="fa-solid fa-sliders"></i>
+            <span>Simulador</span>
+        </a>
+        <a href="#lances" class="mobile-nav-item client-mobile-nav" data-view="lances">
+            <i class="fa-solid fa-gavel"></i>
+            <span>Lance</span>
+        </a>
+        <a href="#financeiro" class="mobile-nav-item client-mobile-nav" data-view="financeiro">
+            <i class="fa-solid fa-wallet"></i>
+            <span>Financeiro</span>
+        </a>
+        <!-- Admin links (will show instead of client links when toggled) -->
+        <a href="#dashboard-admin" class="mobile-nav-item admin-mobile-nav" data-view="dashboard-admin" style="display: none;">
+            <i class="fa-solid fa-chart-line"></i>
+            <span>Visão Geral</span>
+        </a>
+        <a href="#admin-lances" class="mobile-nav-item admin-mobile-nav" data-view="admin-lances" style="display: none;">
+            <i class="fa-solid fa-check-double"></i>
+            <span>Aprovações</span>
+        </a>
+    </nav>
+
+    <!-- Main Wrapper -->
+    <div class="main-wrapper">
+        <header>
+            <div class="header-title-area">
+                <h1 id="view-title">Dashboard</h1>
+            </div>
+            
+            <div class="role-switcher-container">
+                <button class="role-btn active" id="role-client">
+                    <i class="fa-solid fa-user"></i> Cliente
+                </button>
+                <button class="role-btn" id="role-admin">
+                    <i class="fa-solid fa-user-tie"></i> Consultor
+                </button>
+            </div>
+        </header>
+
+        <main class="container">
+
+            <!-- ================= VIEW: CLIENT DASHBOARD ================= -->
+            <section id="dashboard-cliente" class="dashboard-view active">
+                <!-- Metrics -->
+                <div class="metrics-row">
+                    <div class="metric-card glass-panel">
+                        <div class="metric-info">
+                            <h4>Total Pago</h4>
+                            <div class="value">R$ 48.720</div>
+                            <div class="trend up"><i class="fa-solid fa-circle-check"></i> 12/60 Parcelas pagas</div>
+                        </div>
+                        <div class="metric-icon-box bg-cyan-soft">
+                            <i class="fa-solid fa-piggy-bank"></i>
+                        </div>
+                    </div>
+
+                    <div class="metric-card glass-panel">
+                        <div class="metric-info">
+                            <h4>Saldo devedor</h4>
+                            <div class="value">R$ 191.280</div>
+                            <div class="trend"><i class="fa-solid fa-clock"></i> Próxima: 10/07/2026</div>
+                        </div>
+                        <div class="metric-icon-box bg-gold-soft">
+                            <i class="fa-solid fa-hand-holding-dollar"></i>
+                        </div>
+                    </div>
+
+                    <div class="metric-card glass-panel">
+                        <div class="metric-info">
+                            <h4>Cotas Ativas</h4>
+                            <div class="value">02</div>
+                            <div class="trend up"><i class="fa-solid fa-award"></i> 01 Contemplada!</div>
+                        </div>
+                        <div class="metric-icon-box bg-success-soft">
+                            <i class="fa-solid fa-tags"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dashboard Grid -->
+                <div class="dashboard-grid">
+                    <!-- Left: Quotas List -->
+                    <div class="quota-list-panel glass-panel">
+                        <div class="panel-title">
+                            <h2>Minhas Cotas</h2>
+                            <button class="btn btn-secondary btn-sm" id="btn-goto-simulator"><i class="fa-solid fa-plus"></i> Nova Cota</button>
+                        </div>
+                        
+                        <div class="quota-card-list">
+                            <!-- Quota 1 -->
+                            <div class="quota-item glass-panel">
+                                <div class="quota-main-info">
+                                    <div class="quota-category-icon"><i class="fa-solid fa-house" style="color: var(--brand-cyan);"></i></div>
+                                    <div class="quota-details">
+                                        <h3>Consórcio Imobiliário</h3>
+                                        <p>Grupo: <strong>3024</strong> | Cota: <strong>145</strong></p>
+                                        <p>Crédito: R$ 200.000,00</p>
+                                    </div>
+                                </div>
+                                <div class="quota-status">
+                                    <span class="status-badge active">Em dia</span>
+                                    <p style="font-size: 0.8rem; font-weight: 500;">Paga 12/60</p>
+                                </div>
+                            </div>
+
+                            <!-- Quota 2 -->
+                            <div class="quota-item glass-panel">
+                                <div class="quota-main-info">
+                                    <div class="quota-category-icon"><i class="fa-solid fa-car" style="color: var(--brand-gold);"></i></div>
+                                    <div class="quota-details">
+                                        <h3>Consórcio de Automóveis</h3>
+                                        <p>Grupo: <strong>5012</strong> | Cota: <strong>089</strong></p>
+                                        <p>Crédito: R$ 40.000,00</p>
+                                    </div>
+                                </div>
+                                <div class="quota-status">
+                                    <span class="status-badge awarded">Contemplada</span>
+                                    <p style="font-size: 0.8rem; font-weight: 500;">Paga 12/60</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Next Assembly & Quick Actions -->
+                    <div class="assembly-panel glass-panel">
+                        <div class="panel-title">
+                            <h2>Assembleia</h2>
+                        </div>
+                        
+                        <div class="assembly-card">
+                            <p style="text-align: center; font-size: 0.9rem; color: var(--text-secondary);">Próxima Assembleia Geral em:</p>
+                            <div class="countdown-box">
+                                <div class="time-segment">
+                                    <span class="number" id="days">09</span>
+                                    <span class="label">Dias</span>
+                                </div>
+                                <div class="time-segment">
+                                    <span class="number" id="hours">14</span>
+                                    <span class="label">Horas</span>
+                                </div>
+                                <div class="time-segment">
+                                    <span class="number" id="minutes">32</span>
+                                    <span class="label">Minutos</span>
+                                </div>
+                            </div>
+                            
+                            <div class="assembly-history">
+                                <h3 style="font-size: 0.95rem; margin-bottom: 12px;">Último Resultado (Gr. 3024):</h3>
+                                <ul class="history-list">
+                                    <li class="history-item">
+                                        <span class="history-date">Sorteio</span>
+                                        <span class="history-details">Cota <strong>042</strong></span>
+                                    </li>
+                                    <li class="history-item">
+                                        <span class="history-date">Lance Livre</span>
+                                        <span class="history-details"><strong>38,5%</strong> (Cota 221)</span>
+                                    </li>
+                                    <li class="history-item">
+                                        <span class="history-date">Lance Fixo</span>
+                                        <span class="history-details"><strong>20%</strong> (Cota 115)</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ================= VIEW: SIMULATOR ================= -->
+            <section id="simulador" class="dashboard-view">
+                <div class="simulator-card glass-panel">
+                    <div class="panel-title">
+                        <h2>Simular Consórcio</h2>
+                        <p style="font-size: 0.9rem; color: var(--text-secondary);">Escolha a categoria e arraste os valores abaixo para fazer sua simulação</p>
+                    </div>
+
+                    <div class="simulator-grid">
+                        <div class="sim-input-group">
+                            <!-- Category Select -->
+                            <div class="input-control">
+                                <label>Categoria do Bem</label>
+                                <div class="category-selector">
+                                    <div class="category-option active" data-category="imovel">
+                                        <i class="fa-solid fa-house"></i>
+                                        <p>Imóvel</p>
+                                    </div>
+                                    <div class="category-option" data-category="automovel">
+                                        <i class="fa-solid fa-car"></i>
+                                        <p>Auto</p>
+                                    </div>
+                                    <div class="category-option" data-category="moto">
+                                        <i class="fa-solid fa-motorcycle"></i>
+                                        <p>Moto</p>
+                                    </div>
+                                    <div class="category-option" data-category="servicos">
+                                        <i class="fa-solid fa-handshake"></i>
+                                        <p>Serviços</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Range Credit -->
+                            <div class="input-control">
+                                <div style="display: flex; justify-content: space-between;">
+                                    <label>Carta de Crédito</label>
+                                    <span class="value-display" id="display-credit">R$ 200.000</span>
+                                </div>
+                                <input type="range" class="range-slider" id="input-credit" min="50000" max="1000000" step="10000" value="200000">
+                                <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;">
+                                    <span>R$ 50k</span>
+                                    <span>R$ 1M</span>
+                                </div>
+                            </div>
+
+                            <!-- Range Months -->
+                            <div class="input-control">
+                                <div style="display: flex; justify-content: space-between;">
+                                    <label>Prazo de Pagamento</label>
+                                    <span class="value-display" id="display-months">120 meses</span>
+                                </div>
+                                <input type="range" class="range-slider" id="input-months" min="36" max="240" step="12" value="120">
+                                <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;">
+                                    <span>36 meses</span>
+                                    <span>240 meses</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Result Panel -->
+                        <div class="sim-result-panel glass-panel">
+                            <div>
+                                <h3 style="font-size: 1.2rem; margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">Resumo da Simulação</h3>
+                                
+                                <div class="result-row">
+                                    <span class="result-label">Crédito Simulado</span>
+                                    <span class="result-value" id="result-credit">R$ 200.000,00</span>
+                                </div>
+                                <div class="result-row">
+                                    <span class="result-label">Taxa Adm. Total</span>
+                                    <span class="result-value" id="result-tax-rate">15%</span>
+                                </div>
+                                <div class="result-row">
+                                    <span class="result-label">Fundo de Reserva</span>
+                                    <span class="result-value">2%</span>
+                                </div>
+                                <div class="result-row">
+                                    <span class="result-label">Total a Pagar</span>
+                                    <span class="result-value" id="result-total-payable">R$ 234.000,00</span>
+                                </div>
+                            </div>
+
+                            <div style="margin-top: 24px;">
+                                <div class="result-row" style="border: none; padding-bottom: 0;">
+                                    <span class="result-label" style="font-weight: 600;">Parcela Mensal Estimada</span>
+                                    <span class="result-value highlight" id="result-monthly">R$ 1.950,00</span>
+                                </div>
+                                <button class="btn btn-primary" id="btn-request-contact" style="width: 100%; justify-content: center; margin-top: 20px;">
+                                    <i class="fa-solid fa-paper-plane"></i> Tenho Interesse!
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ================= VIEW: BID/LANCES ================= -->
+            <section id="lances" class="dashboard-view">
+                <div class="bid-card glass-panel" style="max-width: 600px; margin: 0 auto;">
+                    <div class="panel-title">
+                        <h2>Ofertar Lance</h2>
+                        <p style="font-size: 0.9rem; color: var(--text-secondary);">Aumente suas chances de contemplação ofertando um lance para a próxima assembleia.</p>
+                    </div>
+
+                    <form id="form-submit-bid">
+                        <div class="form-group">
+                            <label for="bid-quota-select">Selecione a Cota</label>
+                            <select id="bid-quota-select" class="form-select" required>
+                                <option value="" disabled selected>Selecione uma cota ativa...</option>
+                                <option value="imovel">Consórcio Imobiliário - Gr. 3024 / Cota 145 (R$ 200k)</option>
+                                <option value="auto" disabled>Consórcio Auto - Gr. 5012 / Cota 089 (Contemplada)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Modalidade de Lance</label>
+                            <div class="radio-group">
+                                <div class="radio-button active" id="radio-bid-libre">
+                                    <input type="radio" name="bid-type" value="libre" checked>
+                                    <strong>Lance Livre</strong>
+                                    <p style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 4px;">Oferte qualquer percentual</p>
+                                </div>
+                                <div class="radio-button" id="radio-bid-fixe">
+                                    <input type="radio" name="bid-type" value="fixe">
+                                    <strong>Lance Fixo (20%)</strong>
+                                    <p style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 4px;">Percentual fixo do grupo</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group" id="container-bid-value">
+                            <div style="display: flex; justify-content: space-between;">
+                                <label for="bid-percentage">Percentual de Lance</label>
+                                <span class="value-display" id="display-bid-percentage">30%</span>
+                            </div>
+                            <input type="range" class="range-slider" id="bid-percentage" min="10" max="80" value="30">
+                            <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;">
+                                <span>10%</span>
+                                <span>80%</span>
+                            </div>
+                        </div>
+
+                        <!-- Info/Calculations Box -->
+                        <div class="sim-result-panel glass-panel" style="margin-bottom: 24px; padding: 16px;">
+                            <div class="result-row" style="padding: 6px 0;">
+                                <span class="result-label">Valor do Lance</span>
+                                <span class="result-value" id="bid-calculated-value" style="font-weight: 700; color: var(--brand-cyan);">R$ 60.000,00</span>
+                            </div>
+                            <div class="result-row" style="padding: 6px 0; border: none;">
+                                <span class="result-label">Lance Embutido (opcional)</span>
+                                <select id="bid-embedded-select" class="form-select" style="padding: 4px 8px; font-size: 0.8rem; background: rgba(0,0,0,0.2);">
+                                    <option value="0">Não utilizar (0%)</option>
+                                    <option value="10">Utilizar 10% do crédito</option>
+                                    <option value="20">Utilizar 20% do crédito</option>
+                                    <option value="30">Utilizar 30% do crédito</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
+                            <i class="fa-solid fa-gavel"></i> Confirmar e Enviar Lance
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- ================= VIEW: FINANCIAL ================= -->
+            <section id="financeiro" class="dashboard-view">
+                <div class="quota-list-panel glass-panel">
+                    <div class="panel-title">
+                        <h2>Gestão Financeira</h2>
+                        <p style="font-size: 0.9rem; color: var(--text-secondary);">Visualize faturas, pagamentos efetuados e gere código Pix ou boleto.</p>
+                    </div>
+
+                    <!-- Quota selector for financials -->
+                    <div class="form-group" style="max-width: 400px; margin-bottom: 24px;">
+                        <label for="fin-quota-select">Filtrar por Consórcio</label>
+                        <select id="fin-quota-select" class="form-select">
+                            <option value="imovel">Consórcio Imobiliário - Gr. 3024 / Cota 145</option>
+                            <option value="auto">Consórcio Automóveis - Gr. 5012 / Cota 089</option>
+                        </select>
+                    </div>
+
+                    <!-- Invoices list -->
+                    <div class="admin-table-container">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Parcela</th>
+                                    <th>Vencimento</th>
+                                    <th>Valor</th>
+                                    <th>Status</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="financial-table-body">
+                                <!-- Will be populated by JS based on selection, default Imovel shown here as skeleton -->
+                                <tr>
+                                    <td>13 / 60</td>
+                                    <td>10/07/2026</td>
+                                    <td>R$ 3.900,00</td>
+                                    <td><span class="status-badge pending">Aberto</span></td>
+                                    <td>
+                                        <button class="btn btn-primary btn-sm btn-generate-pix" data-installment="13" data-value="3.900,00" style="padding: 6px 12px; font-size: 0.8rem;">
+                                            <i class="fa-solid fa-qrcode"></i> Pagar via Pix
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>12 / 60</td>
+                                    <td>10/06/2026</td>
+                                    <td>R$ 3.900,00</td>
+                                    <td><span class="status-badge active">Pago</span></td>
+                                    <td><button class="btn btn-secondary btn-sm" disabled style="padding: 6px 12px; font-size: 0.8rem; opacity: 0.5;"><i class="fa-solid fa-check"></i> Comprovante</button></td>
+                                </tr>
+                                <tr>
+                                    <td>11 / 60</td>
+                                    <td>10/05/2026</td>
+                                    <td>R$ 3.900,00</td>
+                                    <td><span class="status-badge active">Pago</span></td>
+                                    <td><button class="btn btn-secondary btn-sm" disabled style="padding: 6px 12px; font-size: 0.8rem; opacity: 0.5;"><i class="fa-solid fa-check"></i> Comprovante</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ================= VIEW: ADMIN DASHBOARD ================= -->
+            <section id="dashboard-admin" class="dashboard-view">
+                <!-- Metrics -->
+                <div class="metrics-row">
+                    <div class="metric-card glass-panel">
+                        <div class="metric-info">
+                            <h4>Volume Ativo</h4>
+                            <div class="value">R$ 45,2 M</div>
+                            <div class="trend up"><i class="fa-solid fa-caret-up"></i> +12.4% este mês</div>
+                        </div>
+                        <div class="metric-icon-box bg-cyan-soft">
+                            <i class="fa-solid fa-money-bill-trend-up"></i>
+                        </div>
+                    </div>
+
+                    <div class="metric-card glass-panel">
+                        <div class="metric-info">
+                            <h4>Cotas Vendidas (Mês)</h4>
+                            <div class="value">148</div>
+                            <div class="trend up"><i class="fa-solid fa-caret-up"></i> +8% vs mês anterior</div>
+                        </div>
+                        <div class="metric-icon-box bg-gold-soft">
+                            <i class="fa-solid fa-file-signature"></i>
+                        </div>
+                    </div>
+
+                    <div class="metric-card glass-panel">
+                        <div class="metric-info">
+                            <h4>Novos Lances</h4>
+                            <div class="value" id="admin-pending-badge">03</div>
+                            <div class="trend"><i class="fa-solid fa-triangle-exclamation"></i> Aguardando aprovação</div>
+                        </div>
+                        <div class="metric-icon-box bg-success-soft">
+                            <i class="fa-solid fa-gavel"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Grid -->
+                <div class="charts-grid">
+                    <div class="chart-card glass-panel">
+                        <div class="panel-title">
+                            <h2>Vendas por Categoria (2026)</h2>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="salesChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="chart-card glass-panel">
+                        <div class="panel-title">
+                            <h2>Perfil de Contemplação</h2>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="contemplationChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ================= VIEW: ADMIN LANCES ================= -->
+            <section id="admin-lances" class="dashboard-view">
+                <div class="quota-list-panel glass-panel">
+                    <div class="panel-title">
+                        <h2>Fila de Lances Aguardando Homologação</h2>
+                        <span class="status-badge pending" id="admin-lance-count">3 Pendentes</span>
+                    </div>
+
+                    <div class="admin-table-container">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Grupo/Cota</th>
+                                    <th>Consorciado</th>
+                                    <th>Modalidade</th>
+                                    <th>Percentual</th>
+                                    <th>Valor do Lance</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-lances-tbody">
+                                <!-- Will be rendered via JS -->
+                                <tr id="row-bid-1">
+                                    <td><strong>3024 / 145</strong> (Imóvel)</td>
+                                    <td>Carlos Silva</td>
+                                    <td>Lance Livre (Embutido 10%)</td>
+                                    <td><strong>35%</strong></td>
+                                    <td>R$ 70.000,00</td>
+                                    <td>
+                                        <button class="action-badge badge-approve" onclick="approveBid('1')"><i class="fa-solid fa-check"></i> Homologar</button>
+                                        <button class="action-badge badge-reject" onclick="rejectBid('1')"><i class="fa-solid fa-xmark"></i> Recusar</button>
+                                    </td>
+                                </tr>
+                                <tr id="row-bid-2">
+                                    <td><strong>1020 / 012</strong> (Automóveis)</td>
+                                    <td>Amanda Oliveira</td>
+                                    <td>Lance Fixo</td>
+                                    <td><strong>20%</strong></td>
+                                    <td>R$ 16.000,00</td>
+                                    <td>
+                                        <button class="action-badge badge-approve" onclick="approveBid('2')"><i class="fa-solid fa-check"></i> Homologar</button>
+                                        <button class="action-badge badge-reject" onclick="rejectBid('2')"><i class="fa-solid fa-xmark"></i> Recusar</button>
+                                    </td>
+                                </tr>
+                                <tr id="row-bid-3">
+                                    <td><strong>4040 / 333</strong> (Serviços)</td>
+                                    <td>Marcos Souza</td>
+                                    <td>Lance Livre</td>
+                                    <td><strong>45%</strong></td>
+                                    <td>R$ 13.500,00</td>
+                                    <td>
+                                        <button class="action-badge badge-approve" onclick="approveBid('3')"><i class="fa-solid fa-check"></i> Homologar</button>
+                                        <button class="action-badge badge-reject" onclick="rejectBid('3')"><i class="fa-solid fa-xmark"></i> Recusar</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Pix/Boleto Generation Modal -->
+    <div class="modal-overlay" id="pix-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 style="font-family: 'Outfit', sans-serif;"><i class="fa-solid fa-qrcode" style="color: var(--brand-cyan);"></i> Pagamento da Fatura</h3>
+                <button class="modal-close" id="btn-close-modal"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <p style="font-size: 0.9rem; color: var(--text-secondary);">Escaneie o QR Code abaixo com o app do seu banco ou copie a chave Pix Copia e Cola.</p>
+            
+            <div class="pix-qr-box">
+                <div class="qr-code-placeholder">
+                    <!-- High quality simulated QR code -->
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=timecon-pix-payment-simulated-code" alt="QR Code Pix">
+                </div>
+                <div style="text-align: center;">
+                    <p style="font-size: 0.85rem; color: var(--text-secondary);">Valor da Parcela</p>
+                    <h2 style="color: var(--brand-gold); font-family: 'Outfit', sans-serif;" id="modal-payment-value">R$ 3.900,00</h2>
+                </div>
+            </div>
+
+            <div class="copia-cola-container">
+                <input type="text" class="form-input" id="pix-code-string" value="00020101021226850014br.gov.bcb.pix2563timeconconsórciospagamento13" readonly style="flex-grow: 1; font-size: 0.8rem; padding: 10px;">
+                <button class="btn btn-primary" id="btn-copy-pix" style="padding: 10px;"><i class="fa-solid fa-copy"></i> Copiar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications Container -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- Chart.js CDN for Admin Charts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- App Logic -->
+    <script src="app.js"></script>
+</body>
+</html>
