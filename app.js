@@ -672,21 +672,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnLogoutHeader = document.getElementById('btn-logout-header');
     
     function performLogout() {
-        sessionStorage.removeItem('welcome_visited');
         sessionStorage.removeItem('profile_selected');
         sessionStorage.removeItem('profile_role');
         sessionStorage.removeItem('profile_name');
         
-        // Reset screen states
+        // Go directly to profile selection screen
         if (welcomeLanding) {
-            welcomeLanding.style.opacity = '1';
-            welcomeLanding.style.display = 'flex';
-            welcomeLanding.classList.add('active');
+            welcomeLanding.style.display = 'none';
+            welcomeLanding.classList.remove('active');
         }
         if (profileSelection) {
-            profileSelection.classList.remove('active');
             profileSelection.style.opacity = '1';
-            profileSelection.style.display = 'none';
+            profileSelection.style.display = 'flex';
+            profileSelection.classList.add('active');
         }
         showToast('Você saiu da sua conta.', 'info');
     }

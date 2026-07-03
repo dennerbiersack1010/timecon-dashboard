@@ -359,30 +359,31 @@ header {
 /* Card Widgets & Grid layouts */
 .metrics-row {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 14px;
-    margin-bottom: 20px;
+    grid-template-columns: repeat(3, 1fr); /* Fixed 3 columns on desktop to prevent wrapping */
+    gap: 12px;
+    margin-bottom: 16px;
 }
 
 .metric-card {
-    padding: 12px 16px;
+    padding: 10px 14px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 12px;
+    gap: 10px;
+    min-width: 0;
 }
 
 .metric-info h4 {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     text-transform: uppercase;
-    letter-spacing: 0.8px;
+    letter-spacing: 0.5px;
     color: var(--text-secondary);
-    margin-bottom: 4px;
+    margin-bottom: 2px;
     word-break: break-word;
 }
 
 .metric-info .value {
-    font-size: clamp(1.15rem, 3.5vw, 1.45rem);
+    font-size: 1.25rem; /* Fixed size to prevent massive responsive scaling */
     font-weight: 700;
     color: var(--text-primary);
     font-family: 'Outfit', sans-serif;
@@ -457,13 +458,14 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 16px 20px;
+    padding: 10px 14px; /* More compact padding */
     background: rgba(255, 255, 255, 0.02);
     border: 1px solid var(--border-color);
-    border-radius: 16px;
-    gap: 16px;
-    flex-wrap: wrap;
+    border-radius: 12px;
+    gap: 12px;
+    flex-wrap: nowrap; /* Prevent wrapping which makes the card giant */
     transition: var(--transition-smooth);
+    min-width: 0;
 }
 
 [data-theme="light"] .quota-item {
@@ -479,36 +481,45 @@ header {
 .quota-main-info {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 12px;
+    min-width: 0;
 }
 
 .quota-category-icon {
-    width: 48px;
-    height: 48px;
+    width: 36px; /* Compact icon container */
+    height: 36px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     background: linear-gradient(135deg, rgba(13, 160, 220, 0.15) 0%, rgba(18, 18, 75, 0.3) 100%);
-    font-size: 1.2rem;
+    font-size: 1rem;
     border: 1px solid rgba(13, 160, 220, 0.2);
+    flex-shrink: 0;
 }
 
 .quota-details h3 {
-    font-size: 1.05rem;
-    margin-bottom: 4px;
+    font-size: 0.9rem; /* Smaller font sizes */
+    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .quota-details p {
-    font-size: 0.85rem;
+    font-size: 0.72rem;
     color: var(--text-secondary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .quota-status {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    gap: 8px;
+    gap: 2px;
+    flex-shrink: 0;
 }
 
 .status-badge {
