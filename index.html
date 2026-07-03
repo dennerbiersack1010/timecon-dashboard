@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Timecon | Soluções Financeiras - Portal do Consorciado</title>
-    <!-- CSS Link -->
-    <link rel="stylesheet" href="styles.css">
+    <!-- CSS Link with Cache Buster -->
+    <link rel="stylesheet" href="styles.css?v=20260703_v3">
     <!-- FontAwesome for Premium Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -14,6 +14,36 @@
     <!-- Welcome Landing Screen (Before entering dashboard) -->
     <div id="welcome-landing-screen" class="active">
         <button id="btn-enter-dashboard" class="enter-btn-overlay" aria-label="Acessar Minha Conta"></button>
+    </div>
+
+    <!-- Netflix-Style Profile Selection Screen -->
+    <div id="profile-selection-screen">
+        <div class="profile-container">
+            <h1 class="profile-title">Quem está acessando?</h1>
+            <div class="profile-list">
+                <div class="profile-card" data-profile="client" data-name="Carlos Silva">
+                    <div class="profile-avatar client-avatar">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                    <span class="profile-name">Carlos Silva</span>
+                    <span class="profile-role">Cliente</span>
+                </div>
+                <div class="profile-card" data-profile="admin" data-name="Amanda Oliveira">
+                    <div class="profile-avatar consultant-avatar">
+                        <i class="fa-solid fa-user-tie"></i>
+                    </div>
+                    <span class="profile-name">Amanda Oliveira</span>
+                    <span class="profile-role">Consultora</span>
+                </div>
+                <div class="profile-card" data-profile="admin" data-name="Admin Master">
+                    <div class="profile-avatar master-avatar">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <span class="profile-name">Admin Master</span>
+                    <span class="profile-role">Consultor Geral (Ver Tudo)</span>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Sidebar (Desktop & Tablet) -->

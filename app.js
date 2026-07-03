@@ -591,15 +591,33 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Welcome Landing Screen Logic (Desktop & Mobile)
+    // Welcome Landing Screen & Profile Selection Logic (Netflix Style)
     const welcomeLanding = document.getElementById('welcome-landing-screen');
     const btnEnterDashboard = document.getElementById('btn-enter-dashboard');
-    
-    // Check if welcome screen has already been visited in this session
+    const profileSelection = document.getElementById('profile-selection-screen');
+    const profileCards = document.querySelectorAll('.profile-card');
+    const userDisplayName = document.getElementById('user-display-name');
+
+    // Startup flow
     if (!sessionStorage.getItem('welcome_visited')) {
-        if (welcomeLanding) welcomeLanding.classList.add('active');
+        if (welcomeLanding) {
+            welcomeLanding.style.display = 'flex';
+            welcomeLanding.classList.add('active');
+        }
+    } else if (!sessionStorage.getItem('profile_selected')) {
+        if (welcomeLanding) welcomeLanding.style.display = 'none';
+        if (profileSelection) {
+            profileSelection.style.display = 'flex';
+            profileSelection.classList.add('active');
+        }
     } else {
         if (welcomeLanding) welcomeLanding.style.display = 'none';
+        if (profileSelection) profileSelection.style.display = 'none';
+        const savedRole = sessionStorage.getItem('profile_role') || 'client';
+        const savedName = sessionStorage.getItem('profile_name') || 'Carlos Silva';
+        if (userDisplayName) userDisplayName.innerText = savedName;
+        // Delay role switch slightly to ensure UI is ready
+        setTimeout(() => setRole(savedRole), 50);
     }
 
     if (btnEnterDashboard && welcomeLanding) {
@@ -610,23 +628,67 @@ document.addEventListener('DOMContentLoaded', () => {
                 welcomeLanding.classList.remove('active');
                 welcomeLanding.style.display = 'none';
                 sessionStorage.setItem('welcome_visited', 'true');
-                showToast('Bem-vindo ao Dashboard Timecon!', 'success');
+                
+                // Show profile selector
+                if (profileSelection) {
+                    profileSelection.style.display = 'flex';
+                    profileSelection.style.opacity = '1';
+                    setTimeout(() => {
+                        profileSelection.classList.add('active');
+                    }, 50);
+                }
             }, 400);
         });
     }
+
+    // Profile Selection Interactions
+    profileCards.forEach(card => {
+        card.addEventListener('click', () => {
+            const profileType = card.getAttribute('data-profile');
+            const profileName = card.getAttribute('data-name');
+            
+            if (profileSelection) {
+                profileSelection.style.opacity = '0';
+                profileSelection.style.transition = 'opacity 0.4s ease';
+                setTimeout(() => {
+                    profileSelection.classList.remove('active');
+                    profileSelection.style.display = 'none';
+                    sessionStorage.setItem('profile_selected', 'true');
+                    sessionStorage.setItem('profile_role', profileType === 'client' ? 'client' : 'admin');
+                    sessionStorage.setItem('profile_name', profileName);
+                    
+                    if (userDisplayName) userDisplayName.innerText = profileName;
+                    
+                    // Activate role
+                    setRole(profileType === 'client' ? 'client' : 'admin');
+                    showToast(`Acessando como ${profileName}`, 'success');
+                }, 400);
+            }
+        });
+    });
 
     // Logout Logic
     const btnLogoutSidebar = document.getElementById('btn-logout-sidebar');
     const btnLogoutHeader = document.getElementById('btn-logout-header');
     
     function performLogout() {
+        sessionStorage.removeItem('welcome_visited');
+        sessionStorage.removeItem('profile_selected');
+        sessionStorage.removeItem('profile_role');
+        sessionStorage.removeItem('profile_name');
+        
+        // Reset screen states
         if (welcomeLanding) {
-            sessionStorage.removeItem('welcome_visited');
             welcomeLanding.style.opacity = '1';
             welcomeLanding.style.display = 'flex';
             welcomeLanding.classList.add('active');
-            showToast('Você saiu da sua conta.', 'info');
         }
+        if (profileSelection) {
+            profileSelection.classList.remove('active');
+            profileSelection.style.opacity = '1';
+            profileSelection.style.display = 'none';
+        }
+        showToast('Você saiu da sua conta.', 'info');
     }
     
     if (btnLogoutSidebar) btnLogoutSidebar.addEventListener('click', performLogout);
