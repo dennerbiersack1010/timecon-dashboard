@@ -9,12 +9,12 @@
     --brand-gold: #e19f0d;
     
     /* Dark Theme Variables (Default) */
-    --bg-primary: #070913;
-    --bg-secondary: #0e1125;
-    --bg-card: rgba(18, 22, 47, 0.65);
-    --bg-card-hover: rgba(26, 32, 68, 0.8);
-    --border-color: rgba(255, 255, 255, 0.08);
-    --border-glow: rgba(8, 155, 215, 0.15);
+    --bg-primary: #060713;
+    --bg-secondary: #0c0e25;
+    --bg-card: rgba(16, 20, 48, 0.75);
+    --bg-card-hover: rgba(22, 28, 68, 0.9);
+    --border-color: rgba(255, 255, 255, 0.05);
+    --border-glow: rgba(13, 160, 220, 0.25);
     
     --text-primary: #f1f3f9;
     --text-secondary: #8c93b3;
@@ -91,18 +91,18 @@ h1, h2, h3, h4, .brand-text {
 
 /* Glassmorphism utility */
 .glass-panel {
-    background: var(--bg-card);
+    background: linear-gradient(135deg, rgba(16, 20, 48, 0.75) 0%, rgba(10, 12, 30, 0.9) 100%);
     backdrop-filter: blur(var(--glass-blur));
     -webkit-backdrop-filter: blur(var(--glass-blur));
-    border: 1px solid var(--border-color);
-    border-radius: 16px;
-    box-shadow: var(--card-shadow);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 20px;
+    box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.4);
     transition: var(--transition-smooth);
 }
 
 .glass-panel:hover {
     border-color: var(--border-glow);
-    box-shadow: 0 8px 32px 0 rgba(8, 155, 215, 0.1);
+    box-shadow: 0 12px 40px 0 rgba(13, 160, 220, 0.08);
 }
 
 /* Sidebar Navigation (Desktop) */
@@ -460,7 +460,7 @@ header {
     padding: 16px 20px;
     background: rgba(255, 255, 255, 0.02);
     border: 1px solid var(--border-color);
-    border-radius: 12px;
+    border-radius: 16px;
     gap: 16px;
     flex-wrap: wrap;
     transition: var(--transition-smooth);
@@ -471,8 +471,9 @@ header {
 }
 
 .quota-item:hover {
-    border-color: var(--brand-cyan);
-    background: rgba(8, 155, 215, 0.04);
+    border-color: rgba(13, 160, 220, 0.25);
+    background: linear-gradient(135deg, rgba(13, 160, 220, 0.08) 0%, rgba(18, 22, 47, 0.4) 100%);
+    box-shadow: 0 4px 20px rgba(13, 160, 220, 0.05);
 }
 
 .quota-main-info {
@@ -488,9 +489,9 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255,255,255,0.05);
+    background: linear-gradient(135deg, rgba(13, 160, 220, 0.15) 0%, rgba(18, 18, 75, 0.3) 100%);
     font-size: 1.2rem;
-    border: 1px solid var(--border-color);
+    border: 1px solid rgba(13, 160, 220, 0.2);
 }
 
 .quota-details h3 {
