@@ -615,6 +615,71 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Logout Logic
+    const btnLogoutSidebar = document.getElementById('btn-logout-sidebar');
+    const btnLogoutHeader = document.getElementById('btn-logout-header');
+    
+    function performLogout() {
+        if (welcomeLanding) {
+            sessionStorage.removeItem('welcome_visited');
+            welcomeLanding.style.opacity = '1';
+            welcomeLanding.style.display = 'flex';
+            welcomeLanding.classList.add('active');
+            showToast('Você saiu da sua conta.', 'info');
+        }
+    }
+    
+    if (btnLogoutSidebar) btnLogoutSidebar.addEventListener('click', performLogout);
+    if (btnLogoutHeader) btnLogoutHeader.addEventListener('click', performLogout);
+
+    // FAQ Accordion Logic
+    const faqTriggers = document.querySelectorAll('.faq-trigger');
+    faqTriggers.forEach(trigger => {
+        trigger.addEventListener('click', () => {
+            const parent = trigger.parentElement;
+            const content = parent.querySelector('.faq-content');
+            const icon = trigger.querySelector('i');
+            
+            // Toggle active state
+            const isActive = parent.classList.contains('active');
+            
+            // Close all first
+            document.querySelectorAll('.faq-item').forEach(item => {
+                item.classList.remove('active');
+                const c = item.querySelector('.faq-content');
+                if (c) c.style.maxHeight = null;
+                const ic = item.querySelector('.faq-trigger i');
+                if (ic) ic.style.transform = 'rotate(0deg)';
+            });
+            
+            if (!isActive) {
+                parent.classList.add('active');
+                content.style.maxHeight = content.scrollHeight + "px";
+                icon.style.transform = 'rotate(180deg)';
+            }
+        });
+    });
+
+    // Document Download Simulation
+    const downloadBtns = document.querySelectorAll('.btn-download-doc');
+    downloadBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const docName = btn.getAttribute('data-doc');
+            showToast(`Iniciando download: ${docName}...`, 'info');
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                showToast(`Download de ${docName} concluído!`, 'success');
+                btn.innerHTML = '<i class="fa-solid fa-check"></i>';
+                setTimeout(() => {
+                    btn.innerHTML = '<i class="fa-solid fa-download"></i>';
+                    btn.disabled = false;
+                }, 2000);
+            }, 1500);
+        });
+    });
+
     // Setup initial simulator values
     updateSimulation();
 });

@@ -216,16 +216,16 @@ h1, h2, h3, h4, .brand-text {
     text-align: center;
 }
 
-.nav-item.active a, .nav-item a:hover {
-    background: rgba(18, 18, 75, 0.05);
-    color: var(--brand-navy);
-    border-left: 3px solid var(--brand-navy);
+.nav-item.active a {
+    background: linear-gradient(135deg, rgba(13, 160, 220, 0.12) 0%, rgba(18, 18, 75, 0.04) 100%);
+    color: var(--brand-cyan);
+    border-left: 3px solid var(--brand-cyan);
+    font-weight: 600;
 }
 
-[data-theme="light"] .nav-item.active a, [data-theme="light"] .nav-item a:hover {
-    background: rgba(18, 18, 75, 0.04);
-    color: var(--brand-navy);
-    border-left: 3px solid var(--brand-navy);
+.nav-item a:hover {
+    background: rgba(13, 160, 220, 0.06);
+    color: var(--brand-cyan);
 }
 
 .sidebar-footer {
@@ -359,31 +359,30 @@ header {
 /* Card Widgets & Grid layouts */
 .metrics-row {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 16px;
-    margin-bottom: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+    margin-bottom: 20px;
 }
 
 .metric-card {
-    padding: 16px 20px;
+    padding: 12px 16px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 16px;
-    flex-wrap: wrap;
+    gap: 12px;
 }
 
 .metric-info h4 {
-    font-size: 0.85rem;
+    font-size: 0.75rem;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.8px;
     color: var(--text-secondary);
-    margin-bottom: 8px;
+    margin-bottom: 4px;
     word-break: break-word;
 }
 
 .metric-info .value {
-    font-size: clamp(1.4rem, 4vw, 1.8rem);
+    font-size: clamp(1.15rem, 3.5vw, 1.45rem);
     font-weight: 700;
     color: var(--text-primary);
     font-family: 'Outfit', sans-serif;
@@ -391,21 +390,21 @@ header {
 }
 
 .metric-info .trend {
-    font-size: 0.8rem;
-    margin-top: 6px;
+    font-size: 0.72rem;
+    margin-top: 4px;
     display: flex;
     align-items: center;
     gap: 4px;
 }
 
 .metric-icon-box {
-    width: 54px;
-    height: 54px;
-    border-radius: 12px;
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.4rem;
+    font-size: 1.15rem;
 }
 
 .bg-cyan-soft {
@@ -1221,4 +1220,36 @@ header {
 
 .enter-btn-overlay:active {
     background: rgba(255, 255, 255, 0.05);
+}
+
+/* FAQ Accordion Styling */
+.faq-trigger {
+    background: none;
+    border: none;
+    outline: none;
+    transition: background 0.3s, color 0.3s;
+}
+
+.faq-trigger:hover {
+    color: var(--brand-cyan) !important;
+}
+
+.faq-item.active .faq-trigger i {
+    transform: rotate(180deg);
+}
+
+.faq-content {
+    transition: max-height 0.3s ease-out;
+}
+
+/* Download Docs Spinning Animation */
+.btn-download-doc i.fa-spin {
+    animation: fa-spin 1s infinite linear;
+}
+
+/* Hide Logout button text on mobile */
+@media (max-width: 768px) {
+    .logout-text {
+        display: none;
+    }
 }

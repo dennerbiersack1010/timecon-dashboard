@@ -52,6 +52,12 @@
                     <span>Financeiro</span>
                 </a>
             </li>
+            <li class="nav-item client-nav" data-view="ajuda-faq">
+                <a href="#ajuda-faq">
+                    <i class="fa-solid fa-circle-question"></i>
+                    <span>Ajuda & FAQ</span>
+                </a>
+            </li>
 
             <!-- Admin Views (Hidden by default, shown when Admin is selected) -->
             <li class="nav-item admin-nav" data-view="dashboard-admin" style="display: none;">
@@ -69,12 +75,15 @@
         </ul>
 
         <div class="sidebar-footer">
-            <div class="profile-toggle">
+            <div class="profile-toggle" style="margin-bottom: 10px;">
                 <span id="user-display-name" style="font-size: 0.85rem; font-weight: 500;">Carlos Silva</span>
                 <button class="theme-toggle-btn" title="Alternar Modo Escuro/Claro">
                     <i class="fa-solid fa-moon"></i>
                 </button>
             </div>
+            <button id="btn-logout-sidebar" class="btn btn-secondary" style="width: 100%; justify-content: center; gap: 8px; font-size: 0.85rem; padding: 8px; border-color: rgba(239, 68, 68, 0.2); color: var(--danger); background: transparent;">
+                <i class="fa-solid fa-right-from-bracket"></i> <span>Sair</span>
+            </button>
         </div>
     </nav>
 
@@ -97,6 +106,10 @@
             <i class="fa-solid fa-wallet"></i>
             <span>Financeiro</span>
         </a>
+        <a href="#ajuda-faq" class="mobile-nav-item client-mobile-nav" data-view="ajuda-faq">
+            <i class="fa-solid fa-circle-question"></i>
+            <span>Ajuda</span>
+        </a>
         <!-- Admin links (will show instead of client links when toggled) -->
         <a href="#dashboard-admin" class="mobile-nav-item admin-mobile-nav" data-view="dashboard-admin" style="display: none;">
             <i class="fa-solid fa-chart-line"></i>
@@ -115,12 +128,18 @@
                 <h1 id="view-title">Dashboard</h1>
             </div>
             
-            <div class="role-switcher-container">
-                <button class="role-btn active" id="role-client">
-                    <i class="fa-solid fa-user"></i> Cliente
-                </button>
-                <button class="role-btn" id="role-admin">
-                    <i class="fa-solid fa-user-tie"></i> Consultor
+            <div style="display: flex; align-items: center; gap: 12px;">
+                <div class="role-switcher-container">
+                    <button class="role-btn active" id="role-client">
+                        <i class="fa-solid fa-user"></i> Cliente
+                    </button>
+                    <button class="role-btn" id="role-admin">
+                        <i class="fa-solid fa-user-tie"></i> Consultor
+                    </button>
+                </div>
+                
+                <button id="btn-logout-header" class="btn btn-secondary btn-sm" title="Sair da Conta" style="padding: 6px 10px; font-size: 0.8rem; border-color: rgba(239, 68, 68, 0.2); color: var(--danger); background: transparent;">
+                    <i class="fa-solid fa-right-from-bracket"></i>
                 </button>
             </div>
         </header>
@@ -167,45 +186,71 @@
 
                 <!-- Dashboard Grid -->
                 <div class="dashboard-grid">
-                    <!-- Left: Quotas List -->
-                    <div class="quota-list-panel glass-panel">
-                        <div class="panel-title">
-                            <h2>Minhas Cotas</h2>
-                            <button class="btn btn-secondary btn-sm" id="btn-goto-simulator"><i class="fa-solid fa-plus"></i> Nova Cota</button>
-                        </div>
-                        
-                        <div class="quota-card-list">
-                            <!-- Quota 1 -->
-                            <div class="quota-item">
-                                <div class="quota-main-info">
-                                    <div class="quota-category-icon"><i class="fa-solid fa-house" style="color: var(--brand-cyan);"></i></div>
-                                    <div class="quota-details">
-                                        <h3>Consórcio Imobiliário</h3>
-                                        <p>Grupo: <strong>3024</strong> | Cota: <strong>145</strong></p>
-                                        <p>Crédito: R$ 200.000,00</p>
+                    <!-- Left Column -->
+                    <div style="display: flex; flex-direction: column; gap: 20px;">
+                        <!-- Left: Quotas List -->
+                        <div class="quota-list-panel glass-panel">
+                            <div class="panel-title">
+                                <h2>Minhas Cotas</h2>
+                                <button class="btn btn-secondary btn-sm" id="btn-goto-simulator"><i class="fa-solid fa-plus"></i> Nova Cota</button>
+                            </div>
+                            
+                            <div class="quota-card-list">
+                                <!-- Quota 1 -->
+                                <div class="quota-item">
+                                    <div class="quota-main-info">
+                                        <div class="quota-category-icon"><i class="fa-solid fa-house" style="color: var(--brand-cyan);"></i></div>
+                                        <div class="quota-details">
+                                            <h3>Consórcio Imobiliário</h3>
+                                            <p>Grupo: <strong>3024</strong> | Cota: <strong>145</strong></p>
+                                            <p>Crédito: R$ 200.000,00</p>
+                                        </div>
+                                    </div>
+                                    <div class="quota-status">
+                                        <span class="status-badge active">Em dia</span>
+                                        <p style="font-size: 0.8rem; font-weight: 500;">Paga 12/60</p>
                                     </div>
                                 </div>
-                                <div class="quota-status">
-                                    <span class="status-badge active">Em dia</span>
-                                    <p style="font-size: 0.8rem; font-weight: 500;">Paga 12/60</p>
-                                </div>
-                            </div>
 
-                            <!-- Quota 2 -->
-                            <div class="quota-item">
-                                <div class="quota-main-info">
-                                    <div class="quota-category-icon"><i class="fa-solid fa-car" style="color: var(--brand-gold);"></i></div>
-                                    <div class="quota-details">
-                                        <h3>Consórcio de Automóveis</h3>
-                                        <p>Grupo: <strong>5012</strong> | Cota: <strong>089</strong></p>
-                                        <p>Crédito: R$ 40.000,00</p>
+                                <!-- Quota 2 -->
+                                <div class="quota-item">
+                                    <div class="quota-main-info">
+                                        <div class="quota-category-icon"><i class="fa-solid fa-car" style="color: var(--brand-gold);"></i></div>
+                                        <div class="quota-details">
+                                            <h3>Consórcio de Automóveis</h3>
+                                            <p>Grupo: <strong>5012</strong> | Cota: <strong>089</strong></p>
+                                            <p>Crédito: R$ 40.000,00</p>
+                                        </div>
+                                    </div>
+                                    <div class="quota-status">
+                                        <span class="status-badge awarded">Contemplada</span>
+                                        <p style="font-size: 0.8rem; font-weight: 500;">Paga 12/60</p>
                                     </div>
                                 </div>
-                                <div class="quota-status">
-                                    <span class="status-badge awarded">Contemplada</span>
-                                    <p style="font-size: 0.8rem; font-weight: 500;">Paga 12/60</p>
-                                </div>
                             </div>
+                        </div>
+
+                        <!-- Central de Avisos (Notifications Center) -->
+                        <div class="quota-list-panel glass-panel" style="padding: 20px;">
+                            <div class="panel-title" style="margin-bottom: 12px; border: none; padding: 0;">
+                                <h2 style="font-size: 1.1rem; display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-bell" style="color: var(--brand-cyan);"></i> Central de Avisos</h2>
+                            </div>
+                            <ul class="history-list" style="gap: 8px;">
+                                <li class="history-item" style="padding: 8px 0; display: flex; align-items: flex-start; gap: 12px;">
+                                    <div style="background: rgba(8, 155, 215, 0.1); color: var(--brand-cyan); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><i class="fa-solid fa-gavel" style="font-size: 0.85rem;"></i></div>
+                                    <div style="flex-grow: 1;">
+                                        <h4 style="font-size: 0.9rem; font-weight: 600; margin-bottom: 2px;">Assembleia Geral Próxima</h4>
+                                        <p style="font-size: 0.75rem; color: var(--text-secondary); line-height: 1.4;">Sua cota do Grupo 3024 está concorrendo à assembleia de 10/07. Garanta que seus pagamentos estejam em dia.</p>
+                                    </div>
+                                </li>
+                                <li class="history-item" style="padding: 8px 0; display: flex; align-items: flex-start; gap: 12px; border: none;">
+                                    <div style="background: rgba(225, 159, 13, 0.1); color: var(--brand-gold); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><i class="fa-solid fa-gift" style="font-size: 0.85rem;"></i></div>
+                                    <div style="flex-grow: 1;">
+                                        <h4 style="font-size: 0.9rem; font-weight: 600; margin-bottom: 2px;">Novo Grupo Disponível</h4>
+                                        <p style="font-size: 0.75rem; color: var(--text-secondary); line-height: 1.4;">Novo grupo de Imóveis aberto com taxas administrativas reduzidas até dia 15/07. Acesse o simulador!</p>
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
                     </div>
 
@@ -479,6 +524,90 @@
                                 </tr>
                             </tbody>
                         </table>
+                    </div>
+                </div>
+
+                <!-- Document Download Section inside Financial View -->
+                <div class="quota-list-panel glass-panel" style="margin-top: 20px; padding: 20px;">
+                    <div class="panel-title" style="margin-bottom: 12px; border: none; padding: 0;">
+                        <h2 style="font-size: 1.1rem; display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-file-pdf" style="color: var(--brand-gold);"></i> Central de Documentos</h2>
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 16px;">
+                        <div style="padding: 16px; border: 1px solid var(--border-color); border-radius: 12px; display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.01);">
+                            <div>
+                                <h4 style="font-size: 0.85rem; font-weight: 600; margin-bottom: 4px;">Regulamento Geral</h4>
+                                <p style="font-size: 0.7rem; color: var(--text-secondary);">Regras e diretrizes do grupo</p>
+                            </div>
+                            <button class="btn btn-secondary btn-download-doc" data-doc="Regulamento Geral" style="padding: 8px 12px; font-size: 0.75rem;"><i class="fa-solid fa-download"></i></button>
+                        </div>
+                        <div style="padding: 16px; border: 1px solid var(--border-color); border-radius: 12px; display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.01);">
+                            <div>
+                                <h4 style="font-size: 0.85rem; font-weight: 600; margin-bottom: 4px;">Informe de Rendimentos</h4>
+                                <p style="font-size: 0.7rem; color: var(--text-secondary);">Exercício fiscal 2025</p>
+                            </div>
+                            <button class="btn btn-secondary btn-download-doc" data-doc="Informe de Rendimentos" style="padding: 8px 12px; font-size: 0.75rem;"><i class="fa-solid fa-download"></i></button>
+                        </div>
+                        <div style="padding: 16px; border: 1px solid var(--border-color); border-radius: 12px; display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.01);">
+                            <div>
+                                <h4 style="font-size: 0.85rem; font-weight: 600; margin-bottom: 4px;">Contrato de Adesão</h4>
+                                <p style="font-size: 0.7rem; color: var(--text-secondary);">Cota 145 / Grupo 3024</p>
+                            </div>
+                            <button class="btn btn-secondary btn-download-doc" data-doc="Contrato de Adesão" style="padding: 8px 12px; font-size: 0.75rem;"><i class="fa-solid fa-download"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ================= VIEW: HELP & FAQ ================= -->
+            <section id="ajuda-faq" class="dashboard-view">
+                <div class="simulator-card glass-panel" style="max-width: 800px; margin: 0 auto; padding: 24px;">
+                    <div class="panel-title">
+                        <h2>Central de Ajuda & FAQ</h2>
+                    </div>
+                    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 20px;">Tire suas dúvidas sobre o funcionamento do seu consórcio Timecon.</p>
+                    
+                    <div class="faq-container" style="display: flex; flex-direction: column; gap: 16px;">
+                        <!-- FAQ Item 1 -->
+                        <div class="faq-item" style="border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; background: rgba(255,255,255,0.01);">
+                            <button class="faq-trigger" style="width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; background: none; border: none; color: var(--text-primary); font-family: inherit; font-size: 0.95rem; font-weight: 600; text-align: left; cursor: pointer;">
+                                <span>Como funciona a oferta de lances?</span>
+                                <i class="fa-solid fa-chevron-down" style="font-size: 0.8rem; transition: transform 0.3s;"></i>
+                            </button>
+                            <div class="faq-content" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background: rgba(0,0,0,0.15);">
+                                <p style="padding: 16px 20px; font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5;">
+                                    O lance é um valor que você oferece para adiantar a contemplação da sua cota. Existem duas modalidades: 
+                                    <strong style="color: var(--brand-cyan);">Lance Livre</strong> (onde você oferta qualquer percentual do seu crédito) e 
+                                    <strong style="color: var(--brand-gold);">Lance Fixo</strong> (um percentual pré-definido pelo grupo, como 20%). 
+                                    O maior lance da assembleia é o contemplado.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <!-- FAQ Item 2 -->
+                        <div class="faq-item" style="border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; background: rgba(255,255,255,0.01);">
+                            <button class="faq-trigger" style="width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; background: none; border: none; color: var(--text-primary); font-family: inherit; font-size: 0.95rem; font-weight: 600; text-align: left; cursor: pointer;">
+                                <span>O que é o lance embutido?</span>
+                                <i class="fa-solid fa-chevron-down" style="font-size: 0.8rem; transition: transform 0.3s;"></i>
+                            </button>
+                            <div class="faq-content" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background: rgba(0,0,0,0.15);">
+                                <p style="padding: 16px 20px; font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5;">
+                                    O lance embutido permite que você utilize parte do valor da sua própria carta de crédito (até 30%, dependendo da administradora) para compor o seu lance. Se você for contemplado, esse percentual utilizado é descontado do valor total do crédito liberado.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- FAQ Item 3 -->
+                        <div class="faq-item" style="border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; background: rgba(255,255,255,0.01);">
+                            <button class="faq-trigger" style="width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; background: none; border: none; color: var(--text-primary); font-family: inherit; font-size: 0.95rem; font-weight: 600; text-align: left; cursor: pointer;">
+                                <span>Quando ocorrem os sorteios e assembleias?</span>
+                                <i class="fa-solid fa-chevron-down" style="font-size: 0.8rem; transition: transform 0.3s;"></i>
+                            </button>
+                            <div class="faq-content" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background: rgba(0,0,0,0.15);">
+                                <p style="padding: 16px 20px; font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5;">
+                                    As assembleias ocorrem mensalmente em datas fixas estabelecidas pela administradora de consórcio. Nelas são realizados os sorteios públicos (geralmente baseados na Loteria Federal) e a apuração dos lances ofertados.
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
