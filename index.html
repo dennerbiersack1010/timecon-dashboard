@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Timecon | Soluções Financeiras - Portal do Consorciado</title>
     <!-- CSS Link with Cache Buster -->
-    <link rel="stylesheet" href="styles.css?v=20260703_v8">
+    <link rel="stylesheet" href="styles.css?v=20260703_v9">
     <!-- FontAwesome for Premium Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -21,21 +21,21 @@
         <div class="profile-container">
             <h1 class="profile-title">Quem está acessando?</h1>
             <div class="profile-list">
-                <div class="profile-card" data-profile="client" data-name="Carlos Silva">
+                <div class="profile-card" data-profile="client" data-name="Carlos Silva" data-consultant-id="">
                     <div class="profile-avatar client-avatar">
                         <img src="images/profiles/carlos-silva.png" alt="Carlos Silva">
                     </div>
                     <span class="profile-name">Carlos Silva</span>
                     <span class="profile-role">Cliente</span>
                 </div>
-                <div class="profile-card" data-profile="admin" data-name="Amanda Oliveira">
+                <div class="profile-card" data-profile="admin" data-name="Amanda Oliveira" data-consultant-id="amanda">
                     <div class="profile-avatar consultant-avatar">
                         <img src="images/profiles/amanda-oliveira.png" alt="Amanda Oliveira">
                     </div>
                     <span class="profile-name">Amanda Oliveira</span>
                     <span class="profile-role">Consultora</span>
                 </div>
-                <div class="profile-card" data-profile="admin" data-name="Admin Master">
+                <div class="profile-card" data-profile="admin" data-name="Admin Master" data-consultant-id="admin-master">
                     <div class="profile-avatar master-avatar">
                         <img src="images/profiles/admin-master.png" alt="Admin Master">
                     </div>
@@ -96,6 +96,36 @@
                     <span>Visão Geral</span>
                 </a>
             </li>
+            <li class="nav-item admin-nav super-admin-nav" data-view="consultores" style="display: none;">
+                <a href="#consultores">
+                    <i class="fa-solid fa-people-group"></i>
+                    <span>Consultores</span>
+                </a>
+            </li>
+            <li class="nav-item admin-nav" data-view="carteira-clientes" style="display: none;">
+                <a href="#carteira-clientes">
+                    <i class="fa-solid fa-address-book"></i>
+                    <span>Minha Carteira</span>
+                </a>
+            </li>
+            <li class="nav-item admin-nav" data-view="comissoes" style="display: none;">
+                <a href="#comissoes">
+                    <i class="fa-solid fa-sack-dollar"></i>
+                    <span>Comissões</span>
+                </a>
+            </li>
+            <li class="nav-item admin-nav" data-view="metas-ranking" style="display: none;">
+                <a href="#metas-ranking">
+                    <i class="fa-solid fa-trophy"></i>
+                    <span>Metas & Ranking</span>
+                </a>
+            </li>
+            <li class="nav-item admin-nav" data-view="agenda-assembleias" style="display: none;">
+                <a href="#agenda-assembleias">
+                    <i class="fa-solid fa-calendar-days"></i>
+                    <span>Agenda</span>
+                </a>
+            </li>
             <li class="nav-item admin-nav" data-view="admin-lances" style="display: none;">
                 <a href="#admin-lances">
                     <i class="fa-solid fa-check-double"></i>
@@ -144,6 +174,26 @@
         <a href="#dashboard-admin" class="mobile-nav-item admin-mobile-nav" data-view="dashboard-admin" style="display: none;">
             <i class="fa-solid fa-chart-line"></i>
             <span>Visão Geral</span>
+        </a>
+        <a href="#consultores" class="mobile-nav-item admin-mobile-nav super-admin-mobile-nav" data-view="consultores" style="display: none;">
+            <i class="fa-solid fa-people-group"></i>
+            <span>Consultores</span>
+        </a>
+        <a href="#carteira-clientes" class="mobile-nav-item admin-mobile-nav" data-view="carteira-clientes" style="display: none;">
+            <i class="fa-solid fa-address-book"></i>
+            <span>Carteira</span>
+        </a>
+        <a href="#comissoes" class="mobile-nav-item admin-mobile-nav" data-view="comissoes" style="display: none;">
+            <i class="fa-solid fa-sack-dollar"></i>
+            <span>Comissões</span>
+        </a>
+        <a href="#metas-ranking" class="mobile-nav-item admin-mobile-nav" data-view="metas-ranking" style="display: none;">
+            <i class="fa-solid fa-trophy"></i>
+            <span>Metas</span>
+        </a>
+        <a href="#agenda-assembleias" class="mobile-nav-item admin-mobile-nav" data-view="agenda-assembleias" style="display: none;">
+            <i class="fa-solid fa-calendar-days"></i>
+            <span>Agenda</span>
         </a>
         <a href="#admin-lances" class="mobile-nav-item admin-mobile-nav" data-view="admin-lances" style="display: none;">
             <i class="fa-solid fa-check-double"></i>
@@ -702,6 +752,146 @@
                 </div>
             </section>
 
+            <!-- ================= VIEW: CONSULTORES (Admin Master only) ================= -->
+            <section id="consultores" class="dashboard-view">
+                <div class="panel-title" style="border: none; margin-bottom: 4px;">
+                    <h2>Equipe de Consultores</h2>
+                    <span class="status-badge active" id="consultores-count-badge">-- Ativos</span>
+                </div>
+                <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 20px;">Acompanhe o desempenho de cada consultor, veja a carteira de clientes e edite metas e comissão.</p>
+
+                <div class="consultant-grid" id="consultant-grid">
+                    <!-- Rendered by JS -->
+                </div>
+            </section>
+
+            <!-- ================= VIEW: MINHA CARTEIRA DE CLIENTES ================= -->
+            <section id="carteira-clientes" class="dashboard-view">
+                <div class="quota-list-panel glass-panel">
+                    <div class="panel-title">
+                        <h2 id="carteira-title">Minha Carteira de Clientes</h2>
+                        <div id="carteira-filter-wrap" style="display: none;">
+                            <select id="carteira-consultor-filter" class="form-select" style="padding: 8px 12px; font-size: 0.85rem;">
+                                <option value="todos">Todos os Consultores</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="admin-table-container">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Cliente</th>
+                                    <th>Grupo/Cota</th>
+                                    <th>Categoria</th>
+                                    <th>Crédito</th>
+                                    <th>Status</th>
+                                    <th id="carteira-th-consultor" style="display: none;">Consultor</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="carteira-tbody">
+                                <!-- Rendered by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ================= VIEW: COMISSÕES ================= -->
+            <section id="comissoes" class="dashboard-view">
+                <div class="metrics-row">
+                    <div class="metric-card glass-panel">
+                        <div class="metric-info">
+                            <h4>Comissão do Mês</h4>
+                            <div class="value" id="comissoes-total-mes">R$ 0</div>
+                            <div class="trend up"><i class="fa-solid fa-caret-up"></i> <span id="comissoes-total-trend">--</span></div>
+                        </div>
+                        <div class="metric-icon-box bg-cyan-soft"><i class="fa-solid fa-sack-dollar"></i></div>
+                    </div>
+                    <div class="metric-card glass-panel">
+                        <div class="metric-info">
+                            <h4>Pago</h4>
+                            <div class="value" id="comissoes-pago">R$ 0</div>
+                            <div class="trend"><i class="fa-solid fa-circle-check"></i> Já recebido</div>
+                        </div>
+                        <div class="metric-icon-box bg-success-soft"><i class="fa-solid fa-check"></i></div>
+                    </div>
+                    <div class="metric-card glass-panel">
+                        <div class="metric-info">
+                            <h4>Pendente</h4>
+                            <div class="value" id="comissoes-pendente">R$ 0</div>
+                            <div class="trend"><i class="fa-solid fa-clock"></i> A receber</div>
+                        </div>
+                        <div class="metric-icon-box bg-gold-soft"><i class="fa-solid fa-hourglass-half"></i></div>
+                    </div>
+                </div>
+
+                <div class="quota-list-panel glass-panel">
+                    <div class="panel-title">
+                        <h2 id="comissoes-title">Extrato de Comissões</h2>
+                        <div id="comissoes-filter-wrap" style="display: none;">
+                            <select id="comissoes-consultor-filter" class="form-select" style="padding: 8px 12px; font-size: 0.85rem;">
+                                <option value="todos">Todos os Consultores</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="admin-table-container">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th id="comissoes-th-consultor" style="display: none;">Consultor</th>
+                                    <th>Cliente</th>
+                                    <th>Valor Vendido</th>
+                                    <th>% Comissão</th>
+                                    <th>Comissão</th>
+                                    <th>Status</th>
+                                    <th>Data</th>
+                                </tr>
+                            </thead>
+                            <tbody id="comissoes-tbody">
+                                <!-- Rendered by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ================= VIEW: METAS & RANKING ================= -->
+            <section id="metas-ranking" class="dashboard-view">
+                <div class="dashboard-grid">
+                    <div class="quota-list-panel glass-panel">
+                        <div class="panel-title">
+                            <h2 id="meta-progress-title">Minha Meta Mensal</h2>
+                        </div>
+                        <div id="meta-progress-content">
+                            <!-- Rendered by JS -->
+                        </div>
+                    </div>
+
+                    <div class="assembly-panel glass-panel">
+                        <div class="panel-title">
+                            <h2>Ranking de Vendas</h2>
+                        </div>
+                        <ul class="ranking-list" id="ranking-list">
+                            <!-- Rendered by JS -->
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ================= VIEW: AGENDA DE ASSEMBLEIAS ================= -->
+            <section id="agenda-assembleias" class="dashboard-view">
+                <div class="quota-list-panel glass-panel">
+                    <div class="panel-title">
+                        <h2>Agenda de Assembleias</h2>
+                    </div>
+                    <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: -12px; margin-bottom: 20px;">Próximas datas de sorteio e apuração de lances dos grupos ativos.</p>
+                    <div class="quota-card-list" id="agenda-list">
+                        <!-- Rendered by JS -->
+                    </div>
+                </div>
+            </section>
+
             <!-- ================= VIEW: ADMIN LANCES ================= -->
             <section id="admin-lances" class="dashboard-view">
                 <div class="quota-list-panel glass-panel">
@@ -799,12 +989,65 @@
         </div>
     </div>
 
+    <!-- Edit Consultant Modal (Admin Master) -->
+    <div class="modal-overlay" id="edit-consultant-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 style="font-family: 'Outfit', sans-serif;"><i class="fa-solid fa-user-pen" style="color: var(--brand-cyan);"></i> Editar Consultor</h3>
+                <button class="modal-close" id="btn-close-edit-consultant-modal"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="form-edit-consultant">
+                <input type="hidden" id="edit-consultant-id">
+                <div class="form-group">
+                    <label for="edit-consultant-name">Nome</label>
+                    <input type="text" id="edit-consultant-name" class="form-input" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="edit-consultant-meta">Meta Mensal (R$)</label>
+                    <input type="number" id="edit-consultant-meta" class="form-input" min="0" step="1000" required>
+                </div>
+                <div class="form-group">
+                    <label for="edit-consultant-comissao">Comissão (%)</label>
+                    <input type="number" id="edit-consultant-comissao" class="form-input" min="0" max="10" step="0.1" required>
+                </div>
+                <div class="form-group">
+                    <label for="edit-consultant-status">Status</label>
+                    <select id="edit-consultant-status" class="form-select">
+                        <option value="ativo">Ativo</option>
+                        <option value="inativo">Inativo</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
+                    <i class="fa-solid fa-floppy-disk"></i> Salvar Alterações
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Reassign Client Modal (Admin Master) -->
+    <div class="modal-overlay" id="reassign-modal">
+        <div class="modal-content" style="max-width: 400px;">
+            <div class="modal-header">
+                <h3 style="font-family: 'Outfit', sans-serif;"><i class="fa-solid fa-right-left" style="color: var(--brand-cyan);"></i> Reatribuir Cliente</h3>
+                <button class="modal-close" id="btn-close-reassign-modal"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 16px;" id="reassign-modal-desc">Escolha o novo consultor responsável por este cliente.</p>
+            <div class="form-group">
+                <label for="reassign-consultor-select">Novo Consultor</label>
+                <select id="reassign-consultor-select" class="form-select"></select>
+            </div>
+            <button type="button" class="btn btn-primary" id="btn-confirm-reassign" style="width: 100%; justify-content: center;">
+                <i class="fa-solid fa-check"></i> Confirmar Reatribuição
+            </button>
+        </div>
+    </div>
+
     <!-- Toast Notifications Container -->
     <div class="toast-container" id="toast-container"></div>
 
     <!-- Chart.js CDN for Admin Charts -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- App Logic -->
-    <script src="app.js?v=20260703_v8"></script>
+    <script src="app.js?v=20260703_v9"></script>
 </body>
 </html>
