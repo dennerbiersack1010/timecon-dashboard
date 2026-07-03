@@ -112,37 +112,45 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function setRole(role) {
         state.role = role;
-        
+
         // Toggle Active Class
         if (role === 'client') {
             elements.roleClientBtn.classList.add('active');
             elements.roleAdminBtn.classList.remove('active');
-            
+
+            // Profile is a Client: only the Cliente badge is shown, no switch to Consultor
+            elements.roleClientBtn.style.display = 'flex';
+            elements.roleAdminBtn.style.display = 'none';
+
             // Show/Hide Navigation Links
             document.querySelectorAll('.client-nav').forEach(el => el.style.display = 'block');
             document.querySelectorAll('.admin-nav').forEach(el => el.style.display = 'none');
-            
+
             document.querySelectorAll('.client-mobile-nav').forEach(el => el.style.display = 'flex');
             document.querySelectorAll('.admin-mobile-nav').forEach(el => el.style.display = 'none');
-            
+
             // Switch to client dashboard
             navigateToView('dashboard-cliente');
             showToast('Modo Cliente ativado', 'info');
         } else {
             elements.roleClientBtn.classList.remove('active');
             elements.roleAdminBtn.classList.add('active');
-            
+
+            // Profile is a Consultor/Admin: only the Consultor badge is shown, no switch to Cliente
+            elements.roleClientBtn.style.display = 'none';
+            elements.roleAdminBtn.style.display = 'flex';
+
             // Show/Hide Navigation Links
             document.querySelectorAll('.client-nav').forEach(el => el.style.display = 'none');
             document.querySelectorAll('.admin-nav').forEach(el => el.style.display = 'block');
-            
+
             document.querySelectorAll('.client-mobile-nav').forEach(el => el.style.display = 'none');
             document.querySelectorAll('.admin-mobile-nav').forEach(el => el.style.display = 'flex');
-            
+
             // Switch to admin dashboard
             navigateToView('dashboard-admin');
             showToast('Modo Consultor (Admin) ativado', 'info');
-            
+
             // Initialize charts if not initialized
             initAdminCharts();
         }
@@ -181,6 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
             'simulador': 'Simulador de Crédito',
             'lances': 'Oferta de Lance',
             'financeiro': 'Financeiro & Pagamentos',
+            'ajuda-faq': 'Ajuda & FAQ',
             'dashboard-admin': 'Painel Administrativo',
             'admin-lances': 'Homologação de Lances'
         };
@@ -476,79 +485,152 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function initAdminCharts() {
         if (salesChart || contemplationChart) return; // avoid double init
-        
+
         const isDark = state.theme === 'dark';
-        const gridColor = isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)';
+        const gridColor = isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)';
         const textStyleColor = isDark ? '#8c93b3' : '#5a6080';
+        const tooltipBg = isDark ? '#0c0e25' : '#ffffff';
+        const tooltipBorder = isDark ? 'rgba(255,255,255,0.08)' : 'rgba(1,11,82,0.08)';
+
+        const sharedTooltip = {
+            backgroundColor: tooltipBg,
+            borderColor: tooltipBorder,
+            borderWidth: 1,
+            padding: 12,
+            titleColor: '#f1f3f9',
+            bodyColor: '#8c93b3',
+            titleFont: { family: 'Outfit', size: 13, weight: '600' },
+            bodyFont: { family: 'Inter', size: 12 },
+            cornerRadius: 10,
+            displayColors: true,
+            boxPadding: 4
+        };
 
         // Chart 1: Sales by Category
         const ctxSales = document.getElementById('salesChart').getContext('2d');
+
+        function makeBarGradient(ctx, colorHex) {
+            const g = ctx.createLinearGradient(0, 0, 0, 260);
+            g.addColorStop(0, colorHex + 'e6');
+            g.addColorStop(1, colorHex + '1a');
+            return g;
+        }
+
+        const barColors = ['#0da0dc', '#e19f0d', '#10b981', '#6a7bd6'];
         salesChart = new Chart(ctxSales, {
             type: 'bar',
             data: {
                 labels: ['Imóveis', 'Automóveis', 'Motos', 'Serviços'],
                 datasets: [{
-                    label: 'Volume de Vendas (Milhões R$)',
+                    label: 'Volume (Milhões R$)',
                     data: [24.5, 12.8, 5.4, 2.5],
-                    backgroundColor: [
-                        '#010B52',
-                        '#089bd7',
-                        '#d89607',
-                        '#10b981'
-                    ],
-                    borderRadius: 8,
-                    borderWidth: 0
+                    backgroundColor: barColors.map(c => makeBarGradient(ctxSales, c)),
+                    hoverBackgroundColor: barColors,
+                    borderRadius: { topLeft: 10, topRight: 10, bottomLeft: 0, bottomRight: 0 },
+                    borderSkipped: false,
+                    borderWidth: 0,
+                    maxBarThickness: 46,
+                    barPercentage: 0.65,
+                    categoryPercentage: 0.7
                 }]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
+                layout: { padding: { top: 8 } },
                 plugins: {
-                    legend: { display: false }
+                    legend: { display: false },
+                    tooltip: {
+                        ...sharedTooltip,
+                        callbacks: {
+                            label: (item) => `R$ ${item.parsed.y}M em vendas`
+                        }
+                    }
                 },
                 scales: {
                     x: {
                         grid: { display: false },
-                        ticks: { color: textStyleColor }
+                        border: { display: false },
+                        ticks: { color: textStyleColor, font: { family: 'Inter', size: 12 } }
                     },
                     y: {
-                        grid: { color: gridColor },
-                        ticks: { color: textStyleColor }
+                        grid: { color: gridColor, drawTicks: false },
+                        border: { display: false },
+                        ticks: {
+                            color: textStyleColor,
+                            font: { family: 'Inter', size: 11 },
+                            padding: 8,
+                            callback: (val) => `R$ ${val}M`
+                        }
                     }
                 }
             }
         });
 
-        // Chart 2: Contemplation Profile
+        // Chart 2: Contemplation Profile (slim donut with centered total)
         const ctxCont = document.getElementById('contemplationChart').getContext('2d');
+        const donutColors = ['#12124B', '#0da0dc', '#e19f0d'];
+        const donutBorder = isDark ? '#0c0e25' : '#ffffff';
+
+        const centerTextPlugin = {
+            id: 'centerText',
+            afterDraw(chart) {
+                const { ctx, chartArea } = chart;
+                if (!chartArea) return;
+                const cx = (chartArea.left + chartArea.right) / 2;
+                const cy = (chartArea.top + chartArea.bottom) / 2;
+                ctx.save();
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillStyle = isDark ? '#f1f3f9' : '#0b0e25';
+                ctx.font = "700 22px 'Outfit', sans-serif";
+                ctx.fillText('100%', cx, cy - 8);
+                ctx.fillStyle = textStyleColor;
+                ctx.font = "500 11px 'Inter', sans-serif";
+                ctx.fillText('Contemplações', cx, cy + 14);
+                ctx.restore();
+            }
+        };
+
         contemplationChart = new Chart(ctxCont, {
             type: 'doughnut',
             data: {
                 labels: ['Sorteio', 'Lance Livre', 'Lance Fixo'],
                 datasets: [{
                     data: [35, 45, 20],
-                    backgroundColor: [
-                        '#010B52',
-                        '#089bd7',
-                        '#d89607'
-                    ],
-                    hoverOffset: 4,
-                    borderWidth: 0
+                    backgroundColor: donutColors,
+                    hoverOffset: 6,
+                    borderWidth: 3,
+                    borderColor: donutBorder,
+                    spacing: 2
                 }]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
+                cutout: '74%',
                 plugins: {
                     legend: {
                         position: 'bottom',
                         labels: {
                             color: textStyleColor,
+                            usePointStyle: true,
+                            pointStyle: 'circle',
+                            boxWidth: 8,
+                            boxHeight: 8,
+                            padding: 18,
                             font: { family: 'Inter', size: 12 }
+                        }
+                    },
+                    tooltip: {
+                        ...sharedTooltip,
+                        callbacks: {
+                            label: (item) => ` ${item.label}: ${item.parsed}%`
                         }
                     }
                 }
-            }
+            },
+            plugins: [centerTextPlugin]
         });
     }
 
