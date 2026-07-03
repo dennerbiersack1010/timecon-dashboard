@@ -454,8 +454,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     <td><strong>${bid.pct}%</strong></td>
                     <td>${formatCurrency(bid.value)}</td>
                     <td>
-                        <button class="action-badge badge-approve" onclick="window.approveBid('${bid.id}')"><i class="fa-solid fa-check"></i> Homologar</button>
-                        <button class="action-badge badge-reject" onclick="window.rejectBid('${bid.id}')"><i class="fa-solid fa-xmark"></i> Recusar</button>
+                        <div class="action-buttons">
+                            <button class="action-badge badge-approve" onclick="window.approveBid('${bid.id}')"><i class="fa-solid fa-check"></i> Homologar</button>
+                            <button class="action-badge badge-reject" onclick="window.rejectBid('${bid.id}')"><i class="fa-solid fa-xmark"></i> Recusar</button>
+                        </div>
                     </td>
                 </tr>
             `;

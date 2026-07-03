@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Timecon | Soluções Financeiras - Portal do Consorciado</title>
     <!-- CSS Link with Cache Buster -->
-    <link rel="stylesheet" href="styles.css?v=20260703_v7">
+    <link rel="stylesheet" href="styles.css?v=20260703_v8">
     <!-- FontAwesome for Premium Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -731,8 +731,10 @@
                                     <td><strong>35%</strong></td>
                                     <td>R$ 70.000,00</td>
                                     <td>
-                                        <button class="action-badge badge-approve" onclick="approveBid('1')"><i class="fa-solid fa-check"></i> Homologar</button>
-                                        <button class="action-badge badge-reject" onclick="rejectBid('1')"><i class="fa-solid fa-xmark"></i> Recusar</button>
+                                        <div class="action-buttons">
+                                            <button class="action-badge badge-approve" onclick="approveBid('1')"><i class="fa-solid fa-check"></i> Homologar</button>
+                                            <button class="action-badge badge-reject" onclick="rejectBid('1')"><i class="fa-solid fa-xmark"></i> Recusar</button>
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr id="row-bid-2">
@@ -742,8 +744,10 @@
                                     <td><strong>20%</strong></td>
                                     <td>R$ 16.000,00</td>
                                     <td>
-                                        <button class="action-badge badge-approve" onclick="approveBid('2')"><i class="fa-solid fa-check"></i> Homologar</button>
-                                        <button class="action-badge badge-reject" onclick="rejectBid('2')"><i class="fa-solid fa-xmark"></i> Recusar</button>
+                                        <div class="action-buttons">
+                                            <button class="action-badge badge-approve" onclick="approveBid('2')"><i class="fa-solid fa-check"></i> Homologar</button>
+                                            <button class="action-badge badge-reject" onclick="rejectBid('2')"><i class="fa-solid fa-xmark"></i> Recusar</button>
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr id="row-bid-3">
@@ -753,8 +757,10 @@
                                     <td><strong>45%</strong></td>
                                     <td>R$ 13.500,00</td>
                                     <td>
-                                        <button class="action-badge badge-approve" onclick="approveBid('3')"><i class="fa-solid fa-check"></i> Homologar</button>
-                                        <button class="action-badge badge-reject" onclick="rejectBid('3')"><i class="fa-solid fa-xmark"></i> Recusar</button>
+                                        <div class="action-buttons">
+                                            <button class="action-badge badge-approve" onclick="approveBid('3')"><i class="fa-solid fa-check"></i> Homologar</button>
+                                            <button class="action-badge badge-reject" onclick="rejectBid('3')"><i class="fa-solid fa-xmark"></i> Recusar</button>
+                                        </div>
                                     </td>
                                 </tr>
                             </tbody>
@@ -799,6 +805,6 @@
     <!-- Chart.js CDN for Admin Charts -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- App Logic -->
-    <script src="app.js?v=20260703_v7"></script>
+    <script src="app.js?v=20260703_v8"></script>
 </body>
 </html>
