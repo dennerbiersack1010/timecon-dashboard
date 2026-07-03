@@ -117,6 +117,23 @@ h1, h2, h3, h4, .brand-text {
     transition: var(--transition-smooth);
 }
 
+[data-theme="light"] .glass-panel {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 249, 252, 0.95) 100%);
+    border: 1px solid rgba(1, 11, 82, 0.06);
+    box-shadow: 0 12px 32px 0 rgba(1, 11, 82, 0.06);
+}
+
+/* Elements designed as a subtle white overlay on dark cards need their own
+   light-theme fill, otherwise they turn near-invisible on the now-light card. */
+[data-theme="light"] .btn-secondary,
+[data-theme="light"] .form-select,
+[data-theme="light"] .form-input,
+[data-theme="light"] .category-option,
+[data-theme="light"] .radio-button,
+[data-theme="light"] .rank-position {
+    background: rgba(1, 11, 82, 0.035);
+}
+
 .glass-panel:hover {
     border-color: var(--border-glow);
     box-shadow: 0 12px 40px 0 rgba(13, 160, 220, 0.08);
